@@ -24,16 +24,20 @@ public class Pawn extends Piece {
                 if(b.readValue(i-1,j) == 0 && b.readValue(i-2,j) == 0) possible_moves.add(new Position(i-2,j));
             }
             if(b.readValue(i-1,j) == 0) possible_moves.add(new Position(i-1,j));
-            if(b.readValue(i-1,j-1) == 2 || (b.readValue(i-1,j-1) == 0 && b.readValue(i,j-1) == 2 && b.get_en_passant(i, j-1))) possible_moves.add(new Position(i-1,j-1));
-            if(b.readValue(i-1,j+1) == 2 || (b.readValue(i-1,j+1) == 0 && b.readValue(i,j+1) == 2 && b.get_en_passant(i, j+1))) possible_moves.add(new Position(i-1,j+1));
+            if(b.readValue(i-1,j-1) == 2 || (b.readValue(i-1,j-1) == 0 && b.readValue(i,j-1) == 2 && b.get_en_passant(i, j-1)))
+                possible_moves.add(new Position(i-1,j-1));
+            if(b.readValue(i-1,j+1) == 2 || (b.readValue(i-1,j+1) == 0 && b.readValue(i,j+1) == 2 && b.get_en_passant(i, j+1)))
+                possible_moves.add(new Position(i-1,j+1));
         }
         else{
             if(first_move){
                 if(b.readValue(i+1,j) == 0 && b.readValue(i+2,j) == 0) possible_moves.add(new Position(i+2,j));
             }
             if(b.readValue(i+1,j) == 0) possible_moves.add(new Position(i+1,j));
-            if(b.readValue(i+1,j-1) == 1 || (b.readValue(i+1,j-1) == 0 && b.readValue(i,j-1) == 1 && b.get_en_passant(i, j-1))) possible_moves.add(new Position(i+1,j-1));
-            if(b.readValue(i+1,j+1) == 1 || (b.readValue(i+1,j+1) == 0 && b.readValue(i,j+1) == 1 && b.get_en_passant(i, j+1))) possible_moves.add(new Position(i+1,j+1));
+            if(b.readValue(i+1,j-1) == 1 || (b.readValue(i+1,j-1) == 0 && b.readValue(i,j-1) == 1 && b.get_en_passant(i, j-1)))
+                possible_moves.add(new Position(i+1,j-1));
+            if(b.readValue(i+1,j+1) == 1 || (b.readValue(i+1,j+1) == 0 && b.readValue(i,j+1) == 1 && b.get_en_passant(i, j+1)))
+                possible_moves.add(new Position(i+1,j+1));
         }
         this.possible_moves = possible_moves;
     }

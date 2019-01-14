@@ -100,7 +100,7 @@ public class Game {
 
     private void move(int o1, int o2, int d1, int d2) {
         b.move(o1, o2, d1, d2);
-        // Controlling pawns and checking en-passant and promotion
+        // Controlling pawns and checking en-passant and promotion rules
         pawns_controller(d1,d2);
     }
 
@@ -108,8 +108,10 @@ public class Game {
         if (b.getPiece(d1, d2).equals("P1") || b.getPiece(d1, d2).equals("P2")){
             b.update_frist_move(d1,d2);
             // en-passant
-            if(b.readValue(d1, d2) == 1 && b.readValue(d1+1, d2) != 0 && b.getPiece(d1+1,d2).equals("P2") && b.get_en_passant(d1+1,d2)) b.conquer(d1+1,d2);
-            else if(b.readValue(d1, d2) == 2 && b.readValue(d1-1, d2) != 0 && b.getPiece(d1-1,d2).equals("P1") && b.get_en_passant(d1-1,d2)) b.conquer(d1-1,d2);
+            if(b.readValue(d1, d2) == 1 && b.readValue(d1+1, d2) != 0 && b.getPiece(d1+1,d2).equals("P2") && b.get_en_passant(d1+1,d2))
+                b.conquer(d1+1,d2);
+            else if(b.readValue(d1, d2) == 2 && b.readValue(d1-1, d2) != 0 && b.getPiece(d1-1,d2).equals("P1") && b.get_en_passant(d1-1,d2))
+                b.conquer(d1-1,d2);
             // promotion
             if((b.readValue(d1,d2) == 1 && d1 == 0) || (b.readValue(d1,d2) == 2 && d1 == 7)){
                 Scanner sca = new Scanner(System.in);
