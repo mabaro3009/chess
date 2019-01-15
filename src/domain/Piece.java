@@ -51,4 +51,19 @@ public abstract class Piece {
         return false;
 
     }
+
+    public int get_i(){
+        return i;
+    }
+
+    public int get_j(){
+        return j;
+    }
+
+    public boolean check_check(int i, int j) {
+        for (Position move : possible_moves){
+            if(i == move.getX() && j == move.getY()) return true;
+        }
+        return false;
+    }
 }

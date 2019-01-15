@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -7,6 +8,8 @@ public class Game {
     private int turn;
     private int actual_turn;
     private int winner;
+    private boolean king1_check;
+    private boolean king2_check;
 
     public Game(){
         b = new Board();
@@ -14,15 +17,17 @@ public class Game {
         turn = 1;
         actual_turn = 1;
         winner = 0;
+        king1_check = false;
     }
 
     public void play(){
         while(winner == 0) {
-            updatePieces();
             readBoard();
             System.out.println("Turn: " + Integer.toString(turn));
             if(turn%2 == 0) System.out.println("Player 2 has to move");
             else System.out.println("Player 1 has to move");
+            if(king1_check) System.out.println("King 1 is in check");
+            if(king2_check) System.out.println("King 2 is in check");
             int[] originPos = getOriginPos();
             int[] destPos = getDestPos(originPos);
             move(originPos[0], originPos[1], destPos[0], destPos[1]);
@@ -42,6 +47,7 @@ public class Game {
         int[] originPos = new int[2];
         boolean compleix = false;
         Scanner sca = new Scanner(System.in);
+        updatePieces();
         while(!compleix){
             System.out.println("Enter origin postion:");
             originPos[0] = sca.nextInt();
@@ -106,6 +112,23 @@ public class Game {
         b.move(o1, o2, d1, d2);
         // Controlling pawns and checking en-passant and promotion rules
         pawns_controller(d1,d2);
+        // Update the position each piece can go
+        updatePieces();
+        // Check if a king is in check after the move
+        check_check();
+    }
+
+    private void check_check() {
+        king1_check = king2_check = false;
+        for(int i = 0; i < 8; ++i){
+            for(int j = 0; j < 8; ++j){
+                if (b.readValue(i, j) > 0) {
+                    boolean aux = b.check_check(i, j);
+                    if (aux && b.readValue(i, j) == 1) king2_check = true;
+                    else if (aux && b.readValue(i, j) == 2) king1_check = true;
+                }
+            }
+        }
     }
 
     private void check_endgame(int d1, int d2) {
