@@ -66,7 +66,6 @@ public class Board {
             board[1][i] = new Pawn(2, 1, i);
             board[6][i] = new Pawn(1, 6, i);
         }
-
     }
 
     public String getPiece(int i, int j) {
