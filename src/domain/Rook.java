@@ -41,25 +41,14 @@ public class Rook  extends Piece {
     }
 
     private boolean checkPosition(Board b, int i, int j) {
-        if(team == 1) {
-            if (b.readValue(i, j) == 0) {
-                possible_moves.add(new Position(i, j));
-                return true;
-            } else if (b.readValue(i, j) == 1) return false;
-            else {
-                possible_moves.add(new Position(i, j));
-                return false;
-            }
+        if (b.readValue(i, j) == 0) {
+            possible_moves.add(new Position(i, j));
+            return true;
+        } else if (!b.other_team(team,i,j)) return false;
+        else {
+            possible_moves.add(new Position(i, j));
+            return false;
         }
-        else{
-            if (b.readValue(i, j) == 0) {
-                possible_moves.add(new Position(i, j));
-                return true;
-            } else if (b.readValue(i, j) == 2) return false;
-            else {
-                possible_moves.add(new Position(i, j));
-                return false;
-            }
-        }
+
     }
 }
