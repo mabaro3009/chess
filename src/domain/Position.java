@@ -1,8 +1,8 @@
 package domain;
 
 public class Position {
-    final int x;
-    final int y;
+    private int x;
+    private int y;
 
     public Position(int x, int y){
         this.x = x;
