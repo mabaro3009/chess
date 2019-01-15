@@ -5,19 +5,19 @@ import java.util.Scanner;
 public class Game {
     private Board b;
     private int turn;
-    private Boolean status;
     private int actual_turn;
+    private int winner;
 
     public Game(){
         b = new Board();
         b.startBoard();
         turn = 1;
-        status = true;
         actual_turn = 1;
+        winner = 0;
     }
 
     public void play(){
-        while(status) {
+        while(winner == 0) {
             updatePieces();
             readBoard();
             System.out.println("Turn: " + Integer.toString(turn));
@@ -30,6 +30,8 @@ public class Game {
             if(actual_turn == 1) actual_turn = 2;
             else actual_turn = 1;
         }
+        readBoard();
+        System.out.println("Player " + Integer.toString(winner) + " wins!");
     }
 
     private void updatePieces() {
@@ -99,9 +101,16 @@ public class Game {
     }
 
     private void move(int o1, int o2, int d1, int d2) {
+        // Check if a king is about to be captured
+        check_endgame(d1, d2);
         b.move(o1, o2, d1, d2);
         // Controlling pawns and checking en-passant and promotion rules
         pawns_controller(d1,d2);
+    }
+
+    private void check_endgame(int d1, int d2) {
+        if (b.readValue(d1,d2) > 0 && ((actual_turn == 1 && b.getPiece(d1, d2).equals("K2")) || actual_turn == 2 && b.getPiece(d1, d2).equals("K1")))
+            winner = actual_turn;
     }
 
     private void pawns_controller(int d1, int d2) {
