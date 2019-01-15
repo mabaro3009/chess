@@ -13,7 +13,7 @@ public class Rook  extends Piece {
     }
 
     public void updatePiece(Board b) {
-        this.possible_moves = new ArrayList<>();
+        this.possible_moves.clear();
         boolean compleix = true;
         // Up
         for (int k = this.i - 1; k >= 0 && compleix; --k) {

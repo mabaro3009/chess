@@ -15,6 +15,12 @@ public class Board {
         return board[i][j].getTeam();
     }
 
+    public boolean other_team(int team, int i, int j){
+        if(team == 1) return (readValue(i,j) == 2);
+
+        else return (readValue(i,j) == 1);
+    }
+
     public void writeValue(int i, int j, Piece p){
         board[i][j] = p;
     }
