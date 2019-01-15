@@ -41,7 +41,6 @@ public abstract class Piece {
     }
 
     protected boolean checkPosition(Board b, int i, int j) {
-        //System.out.println(Integer.toString(i) + ' ' + Integer.toString(j));
         if (b.readValue(i,j) == -1) return false;
         if (b.readValue(i, j) == 0) {
             possible_moves.add(new Position(i, j));
