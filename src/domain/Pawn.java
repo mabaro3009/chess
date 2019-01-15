@@ -18,7 +18,7 @@ public class Pawn extends Piece {
 
 
     public void updatePiece(Board b) {
-        ArrayList<Position> possible_moves = new ArrayList<Position>();
+        ArrayList<Position> possible_moves = new ArrayList<>();
         if(team == 1){
             if(first_move){
                 if(b.readValue(i-1,j) == 0 && b.readValue(i-2,j) == 0) possible_moves.add(new Position(i-2,j));
