@@ -39,4 +39,17 @@ public abstract class Piece {
         }
         return false;
     }
+
+    protected boolean checkPosition(Board b, int i, int j) {
+        //System.out.println(Integer.toString(i) + ' ' + Integer.toString(j));
+        if (b.readValue(i,j) == -1) return false;
+        if (b.readValue(i, j) == 0) {
+            possible_moves.add(new Position(i, j));
+            return true;
+        }
+        if (!b.other_team(team,i,j)) return false;
+        possible_moves.add(new Position(i, j));
+        return false;
+
+    }
 }
