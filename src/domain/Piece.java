@@ -67,7 +67,4 @@ public abstract class Piece {
         return false;
     }
 
-    public ArrayList<Position> getPossible_moves(){
-        return possible_moves;
-    }
 }

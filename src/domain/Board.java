@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Board {
     private Piece[][] board;
     private King king1;
@@ -108,34 +105,6 @@ public class Board {
         for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 8; ++j){
                 if(board[i][j] != null) board[i][j].updatePiece(this);
-
-                if(board[i][j] == king1){
-                    ArrayList<Position> possible_moves = king1.getPossible_moves();
-                    for (int k = 0; k < possible_moves.size(); ++k){
-                        Position p_move = possible_moves.get(k);
-                        move(i, j, p_move.getX(), p_move.getY());
-                        for(int x = 0; x < 8; ++x){
-                            for(int y = 0; y < 8; ++y){
-                                if(readValue(x,y) == 2 && check_check(x,y)) king1.delete_possible_move(k);
-                            }
-                        }
-                        move(p_move.getX(), p_move.getY(), i, j);
-                    }
-                }
-
-                else if(board[i][j] == king2){
-                    ArrayList<Position> possible_moves = king2.getPossible_moves();
-                    for (int k = 0; k < possible_moves.size(); ++k){
-                        Position p_move = possible_moves.get(k);
-                        move(i, j, p_move.getX(), p_move.getY());
-                        for(int x = 0; x < 8; ++x){
-                            for(int y = 0; y < 8; ++y){
-                                if(readValue(x,y) == 1 && check_check(x,y)) king2.delete_possible_move(k);
-                            }
-                        }
-                        move(p_move.getX(), p_move.getY(), i, j);
-                    }
-                }
             }
         }
     }
@@ -150,5 +119,9 @@ public class Board {
             return board[i][j].check_check(king2.get_i(), king2.get_j());
         else
             return board[i][j].check_check(king1.get_i(), king1.get_j());
+    }
+
+    public Piece savePiece(int o1, int o2) {
+        return board[o1][o2];
     }
 }

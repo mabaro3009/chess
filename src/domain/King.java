@@ -14,39 +14,48 @@ public class King extends Piece {
         this.possible_moves.clear();
 
         // Up
-        if (b.readValue(i-1,j) == 0 || b.other_team(team, i-1,j))
-            possible_moves.add(new Position(i-1,j));
+        try_move(i, j, i-1, j, b);
 
         // Up-Right
-        if (b.readValue(i-1,j+1) == 0 || b.other_team(team, i-1,j+1))
-            possible_moves.add(new Position(i-1,j+1));
+        try_move(i, j, i-1, j+1, b);
 
         // Right
-        if (b.readValue(i,j+1) == 0 || b.other_team(team, i,j+1))
-            possible_moves.add(new Position(i,j+1));
+        try_move(i, j, i, j+1, b);
 
         // Down-Right
-        if (b.readValue(i+1,j+1) == 0 || b.other_team(team, i+1,j+1))
-            possible_moves.add(new Position(i+1,j+1));
+        try_move(i, j, i+1, j+1, b);
 
         // Down
-        if (b.readValue(i+1,j) == 0 || b.other_team(team, i+1,j))
-            possible_moves.add(new Position(i+1,j));
+        try_move(i, j, i+1, j, b);
 
         // Down-Left
-        if (b.readValue(i+1,j-1) == 0 || b.other_team(team, i+1,j-1))
-            possible_moves.add(new Position(i+1,j-1));
+        try_move(i, j, i+1, j-1, b);
 
         // Left
-        if (b.readValue(i,j-1) == 0 || b.other_team(team, i,j-1))
-            possible_moves.add(new Position(i,j-1));
+        try_move(i, j, i, j-1, b);
 
         // Up-Left
-        if (b.readValue(i-1,j-1) == 0 || b.other_team(team, i-1,j-1))
-            possible_moves.add(new Position(i-1,j-1));
+        try_move(i, j, i-1, j-1, b);
     }
 
-    public void delete_possible_move(int k) {
-        possible_moves.remove(k);
+    private void try_move(int o1, int o2, int d1, int d2, Board b){
+        if (b.readValue(d1,d2) == 0 || b.other_team(team, d1,d2)) {
+            boolean other_team_piece = false;
+            Piece aux = b.savePiece(o1, o2);
+            if(b.other_team(team, d1, d2)) {
+                other_team_piece = true;
+                aux = b.savePiece(d1, d2);
+            }
+            b.move(o1, o2, d1, d2);
+            boolean compleix = true;
+            for(int x = 0; x < 8; ++x){
+                for(int y = 0; y < 8; ++y){
+                    if(b.other_team(team, x,y) && b.check_check(x,y)) compleix = false;
+                }
+            }
+            if(compleix) possible_moves.add(new Position(d1, d2));
+            b.move(d1, d2, o1, o2);
+            if(other_team_piece) b.writeValue(d1, d2, aux);
+        }
     }
 }
