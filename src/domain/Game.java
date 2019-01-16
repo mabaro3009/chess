@@ -110,12 +110,20 @@ public class Game {
         // Check if a king is about to be captured
         check_endgame(d1, d2);
         b.move(o1, o2, d1, d2);
+        // Updating first move
+        b.update_frist_move(d1, d2);
+        // Controlling knights and rooks first moves and checking for castling
+        castling_controller(d1, d2);
         // Controlling pawns and checking en-passant and promotion rules
         pawns_controller(d1,d2);
         // Update the position each piece can go
         updatePieces();
         // Check if a king is in check after the move
         check_check();
+    }
+
+    private void castling_controller(int d1, int d2) {
+
     }
 
     private void check_check() {

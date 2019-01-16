@@ -7,12 +7,14 @@ public abstract class Piece {
     protected int i;
     protected int j;
     protected ArrayList<Position> possible_moves;
+    protected boolean first_move;
 
     public Piece(int team, int i, int j){
         this.team = team;
         this.i = i;
         this.j = j;
         this.possible_moves = new ArrayList<>();
+        this.first_move = true;
     }
 
     public int getTeam() {
@@ -67,4 +69,5 @@ public abstract class Piece {
         return false;
     }
 
+    public abstract void update_first_move();
 }

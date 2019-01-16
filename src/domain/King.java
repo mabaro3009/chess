@@ -12,7 +12,6 @@ public class King extends Piece {
 
     public void updatePiece(Board b) {
         this.possible_moves.clear();
-
         // Up
         try_move(i, j, i-1, j, b);
 
@@ -36,8 +35,14 @@ public class King extends Piece {
 
         // Up-Left
         try_move(i, j, i-1, j-1, b);
+
+        // Castling
+        if (team == 1){
+
+        }
     }
 
+    // Adds [d1][d2] to possible_moves if king won't be checked at [d1][d2]
     private void try_move(int o1, int o2, int d1, int d2, Board b){
         if (b.readValue(d1,d2) == 0 || b.other_team(team, d1,d2)) {
             boolean other_team_piece = false;
@@ -56,6 +61,12 @@ public class King extends Piece {
             if(compleix) possible_moves.add(new Position(d1, d2));
             b.move(d1, d2, o1, o2);
             if(other_team_piece) b.writeValue(d1, d2, aux);
+        }
+    }
+
+    public void update_first_move(){
+        if(first_move){
+            first_move = false;
         }
     }
 }

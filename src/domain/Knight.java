@@ -32,4 +32,10 @@ public class Knight extends Piece {
         if(b.readValue(i-2,j-1) == 0 || b.other_team(team, i-2,j-1))
             possible_moves.add(new Position(i-2,j-1));
     }
+
+    public void update_first_move(){
+        if(first_move){
+            first_move = false;
+        }
+    }
 }

@@ -110,7 +110,7 @@ public class Board {
     }
 
     public void update_frist_move(int d1, int d2) {
-        ((Pawn)board[d1][d2]).update_first_move();
+        board[d1][d2].update_first_move();
     }
 
 

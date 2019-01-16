@@ -3,12 +3,10 @@ package domain;
 import java.util.ArrayList;
 
 public class Pawn extends Piece {
-    private boolean first_move;
     private boolean en_passant;
 
     public Pawn(int team, int i, int j){
         super(team, i, j);
-        this.first_move = true;
         this.en_passant = false;
     }
 
