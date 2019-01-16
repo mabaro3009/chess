@@ -45,4 +45,8 @@ public class King extends Piece {
         if (b.readValue(i-1,j-1) == 0 || b.other_team(team, i-1,j-1))
             possible_moves.add(new Position(i-1,j-1));
     }
+
+    public void delete_possible_move(int k) {
+        possible_moves.remove(k);
+    }
 }
