@@ -33,9 +33,4 @@ public class Knight extends Piece {
             possible_moves.add(new Position(i-2,j-1));
     }
 
-    public void update_first_move(){
-        if(first_move){
-            first_move = false;
-        }
-    }
 }

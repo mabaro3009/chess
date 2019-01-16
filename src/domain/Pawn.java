@@ -39,9 +39,8 @@ public class Pawn extends Piece {
         }
     }
 
-    public void update_first_move(){
+    public void update_first_move_en_passant(){
         if(first_move){
-            first_move = false;
             en_passant = true;
         }
     }

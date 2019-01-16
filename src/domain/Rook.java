@@ -40,9 +40,4 @@ public class Rook  extends Piece {
 
     }
 
-    public void update_first_move(){
-        if(first_move){
-            first_move = false;
-        }
-    }
 }

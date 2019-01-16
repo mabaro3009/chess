@@ -69,5 +69,9 @@ public abstract class Piece {
         return false;
     }
 
-    public abstract void update_first_move();
+    public void update_first_move(){
+        if(first_move){
+            first_move = false;
+        }
+    }
 }

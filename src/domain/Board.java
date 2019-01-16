@@ -124,4 +124,8 @@ public class Board {
     public Piece savePiece(int o1, int o2) {
         return board[o1][o2];
     }
+
+    public void update_frist_move_en_passant(int d1, int d2) {
+        ((Pawn)board[d1][d2]).update_first_move_en_passant();
+    }
 }
