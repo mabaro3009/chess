@@ -112,12 +112,26 @@ public class Game {
         b.move(o1, o2, d1, d2);
         // Controlling pawns and checking en-passant and promotion rules
         pawns_controller(d1,d2);
+        // Controlling rook's movement when castling occurs
+        castling_controller(o1, o2, d1, d2);
         // Updating first move
         b.update_frist_move(d1, d2);
         // Update the position each piece can go
         updatePieces();
         // Check if a king is in check after the move
         check_check();
+    }
+
+    private void castling_controller(int o1, int o2, int d1, int d2) {
+        // if its a king and it has moved 2 tiles horizontally, then it's castling
+        if((b.getPiece(d1, d2).equals("K1") || b.getPiece(d1, d2).equals("K2")) &&
+                (d2 == o2 + 2 || d2 == o2 -2)){
+            // Right movement
+            if(d2 > o2) b.move(d1, d2+1, d1, d2-1);
+
+            // Left movement
+            else b.move(d1, d2-2, d1, d2+1);
+        }
     }
 
     private void check_check() {
