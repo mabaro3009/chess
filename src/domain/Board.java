@@ -47,9 +47,9 @@ public class Board {
         board[0][0] = new Rook(2, 0, 0);
         board[0][1] = new Knight(2, 0, 1);
         board[0][2] = new Bishop(2, 0, 2);
-        king2 =  new King(2, 0, 3);
-        board[0][3] = king2;
-        board[0][4] = new Queen(2, 0, 4);
+        board[0][3] = new Queen(2, 0, 3);
+        king2 =  new King(2, 0, 4);
+        board[0][4] = king2;
         board[0][5] = new Bishop(2, 0, 5);
         board[0][6] = new Knight(2, 0, 6);
         board[0][7] = new Rook(2, 0, 7);
@@ -57,9 +57,9 @@ public class Board {
         board[7][0] = new Rook(1, 7, 0);
         board[7][1] = new Knight(1, 7, 1);
         board[7][2] = new Bishop(1, 7, 2);
-        king1 = new King(1, 7, 3);
-        board[7][3] = king1;
-        board[7][4] = new Queen(1, 7, 4);
+        board[7][3] = new Queen(1, 7, 3);
+        king1 = new King(1, 7, 4);
+        board[7][4] = king1;
         board[7][5] = new Bishop(1, 7, 5);
         board[7][6] = new Knight(1, 7, 6);
         board[7][7] = new Rook(1, 7, 7);
@@ -71,7 +71,9 @@ public class Board {
     }
 
     public String getPiece(int i, int j) {
-        if (i < 0 || i > 7 || j < 0 || j > 7) return "null";
+        int r = readValue(i, j);
+        if (r == -1) return "off";
+        if (r == 0) return "null";
         return board[i][j].getPiece();
     }
 
@@ -127,5 +129,14 @@ public class Board {
 
     public void update_frist_move_en_passant(int d1, int d2) {
         ((Pawn)board[d1][d2]).update_first_move_en_passant();
+    }
+
+    public void update_check(boolean king1_check, boolean king2_check) {
+        king1.updtate_check(king1_check);
+        king2.updtate_check(king2_check);
+    }
+
+    public Piece get_instace(int i, int j){
+        return board[i][j];
     }
 }

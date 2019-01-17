@@ -2,8 +2,11 @@ package domain;
 
 public class King extends Piece {
 
+    private boolean check;
+
     public King(int team, int i, int j){
         super(team, i, j);
+        this.check = false;
     }
 
     public String getPiece(){
@@ -37,8 +40,18 @@ public class King extends Piece {
         try_move(i, j, i-1, j-1, b);
 
         // Castling
-        if (team == 1){
+        if (first_move && !check){
+            // Right movement
+            if(b.readValue(i, j+1) == 0 && b.readValue(i, j+2) == 0 && b.readValue(i, j+3) == team &&
+                    b.get_instace(i, j+3) instanceof Rook && b.get_instace(i, j+3).get_first_move()) {
+                try_move(i, j, i, j + 2, b);
+            }
 
+            // Left movement
+            if(b.readValue(i, j-1) == 0 && b.readValue(i, j-2) == 0  && b.readValue(i, j-3) == 0 &&
+                    b.readValue(i, j-4) == team && b.get_instace(i, j-4) instanceof Rook &&
+                    b.get_instace(i, j-4).get_first_move())
+                try_move(i, j, i, j-2, b);
         }
     }
 
@@ -64,4 +77,7 @@ public class King extends Piece {
         }
     }
 
+    public void updtate_check(boolean king_check) {
+        check = king_check;
+    }
 }

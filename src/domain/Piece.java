@@ -74,4 +74,8 @@ public abstract class Piece {
             first_move = false;
         }
     }
+
+    public boolean get_first_move(){
+        return first_move;
+    }
 }
